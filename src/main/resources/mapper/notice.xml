@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.ssafy.ssabang.notice.model.mapper.NoticeMapper">
+
+	<select id="select" resultMap="basicNoticeMap">
+		select * from boards;
+	</select>
+	
+	<select id="detail" resultMap="basicNoticeMap" parameterType="int">
+		select * from boards
+		where article_no = #{articleNo}
+	</select>
+	
+	<insert id="insert" parameterType="notice">
+		insert into boards (article_no, id, title, content, show_cnt, register_time)
+		values (#{articleNo}, #{id}, #{title}, #{content}, #{showCnt}, #{registerTime})
+	</insert>
+	
+	<resultMap type="notice" id="basicNoticeMap">
+		<id column="article_no" property="articleNo" />
+		<result column="id" property="id"/>
+		<result column="title" property="title"/>
+		<result column="content" property="content"/>
+		<result column="show_cnt" property="showCnt"/>
+		<result column="register_time" property="registerTime"/>
+	</resultMap>
+</mapper>
